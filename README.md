@@ -49,7 +49,7 @@ In a separate terminal, start the Mininet topology:
 sudo mn --topo single,4 --controller remote,ip=127.0.0.1,port=6633 --mac
 ```
 
-![Launching the network](./screenshots/initial_test.png)
+![Launching the network](Screenshots/initial_test.png)
 
 ---
 
@@ -83,7 +83,7 @@ test
 mininet> h1 ping -c 3 h2
 ```
 
-![Ping Success](./screenshots/allowed_test.png)
+![Ping Success](Screenshots/allowed_test.png)
 
 ---
 
@@ -93,7 +93,7 @@ mininet> h1 ping -c 3 h2
 mininet> h3 ping -c 3 h4
 ```
 
-![Ping Blocked](./screenshots/blocked_test.png)
+![Ping Blocked](Screenshots/blocked_test.png)
 
 ---
 
@@ -103,7 +103,7 @@ mininet> h3 ping -c 3 h4
 mininet> pingall
 ```
 
-![Pingall](./screenshots/pingall.png)
+![Pingall](Screenshots/pingall.png)
 
 ---
 
@@ -120,7 +120,7 @@ We observe that the controller installs flow entries that:
 * Match whitelisted MAC addresses (h1, h2) → Forward action
 * Match non-whitelisted MAC addresses (h3, h4) → Drop action
 
-![Flow Table](./screenshots/flow_table.png)
+![Flow Table](Screenshots/flow_table.png)
 
 ---
 
