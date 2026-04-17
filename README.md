@@ -2,7 +2,7 @@
 
 Course: Computer Networks Lab
 
-Project Type: SDN Mininet Simulation (Orange Problem #11)
+Project Type: SDN Mininet Simulation
 
 ---
 
