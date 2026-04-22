@@ -36,7 +36,7 @@ Ensure you have Mininet and POX installed in your Ubuntu/WSL environment.
 Place access_control.py in the pox/ext directory and run:
 
 ```bash
-python3 pox.py log.level --DEBUG ext.access_control
+python3 pox.py log.level --DEBUG access_control
 ```
 
 ---
@@ -52,7 +52,7 @@ sudo mn --topo single,4 --controller remote,ip=127.0.0.1,port=6633 --mac
 ![Launching the network](Screenshots/initial_test.png)
 
 ---
-
+w
 ## Results & Validation
 
 ### Connectivity Testing
