@@ -58,7 +58,7 @@ Ensure you have Mininet and POX installed in your Ubuntu/WSL environment.
 Place access_control.py in the pox/ext directory and run:
 
 ```bash id="a1"
-python3 pox.py log.level --DEBUG ext.access_control
+python3 pox.py log.level --DEBUG access_control
 ```
 
 ---
