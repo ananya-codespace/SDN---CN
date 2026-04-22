@@ -131,7 +131,7 @@ mininet> h1 iperf -c 10.0.0.2 -t 5
 
 ### 🔹 Observed Output
 
-![iPerf Result](Screenshots/iperf.png)
+![iPerf Result Authorized](Screenshots/iperf_auth.png)
 
 ---
 
@@ -151,6 +151,12 @@ mininet> h1 iperf -c 10.0.0.2 -t 5
 ```bash id="a8"
 mininet> h3 iperf -c 10.0.0.4
 ```
+
+### 🔹 Observed Output
+
+![iPerf Result Unauthorized](Screenshots/iperf_unauth.png)
+
+---
 
 * Connection fails or no throughput observed
 
