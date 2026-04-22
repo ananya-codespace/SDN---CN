@@ -35,8 +35,8 @@ Ensure you have Mininet and POX installed in your Ubuntu/WSL environment.
 
 Place access_control.py in the pox/ext directory and run:
 
-```bash
-python3 pox.py log.level --DEBUG access_control
+```bash id="a1"
+python3 pox.py log.level --DEBUG ext.access_control
 ```
 
 ---
@@ -45,22 +45,22 @@ python3 pox.py log.level --DEBUG access_control
 
 In a separate terminal, start the Mininet topology:
 
-```bash
+```bash id="a2"
 sudo mn --topo single,4 --controller remote,ip=127.0.0.1,port=6633 --mac
 ```
 
 ![Launching the network](Screenshots/initial_test.png)
 
 ---
-w
+
 ## Results & Validation
 
 ### Connectivity Testing
 
 * **h1 -> h2 (Authorized):** Communication is successful with 0% packet loss.
 
-```bash
-mininet> h1 ping -c 3 h2
+```bash id="a3"
+mininet> h1 ping h2
 ```
 
 ![Ping Success](Screenshots/allowed_test.png)
@@ -69,8 +69,8 @@ mininet> h1 ping -c 3 h2
 
 * **h3 -> h4 (Unauthorized):** Communication is blocked; results in 100% packet loss.
 
-```bash
-mininet> h3 ping -c 3 h4
+```bash id="a4"
+mininet> h3 ping h4
 ```
 
 ![Ping Blocked](Screenshots/blocked_test.png)
@@ -79,7 +79,7 @@ mininet> h3 ping -c 3 h4
 
 * **pingall:** Demonstrates that authorized hosts are reachable while unauthorized hosts are restricted based on the whitelist policy.
 
-```bash
+```bash id="a5"
 mininet> pingall
 ```
 
@@ -87,11 +87,60 @@ mininet> pingall
 
 ---
 
+## 🚀 Performance Testing using iPerf
+
+To evaluate network performance and validate access control, **iperf** is used to measure throughput between hosts.
+
+### 🔹 Test Setup
+
+Start iperf server on h2:
+
+```bash id="a6"
+mininet> h2 iperf -s &
+```
+
+Run iperf client on h1:
+
+```bash id="a7"
+mininet> h1 iperf -c 10.0.0.2 -t 5
+```
+
+---
+
+### 🔹 Observed Output
+
+![iPerf Result](Screenshots/iperf.png)
+
+---
+
+### 🔹 Result Analysis
+
+* Successful TCP connection between h1 and h2
+* Data transfer ~17–18 GBytes in 5 seconds
+* Throughput ~29–31 Gbits/sec
+* High bandwidth due to Mininet virtual environment
+
+👉 Confirms that authorized hosts communicate efficiently.
+
+---
+
+### 🔹 Unauthorized Case (Expected Behavior)
+
+```bash id="a8"
+mininet> h3 iperf -c 10.0.0.4
+```
+
+* Connection fails or no throughput observed
+
+👉 Confirms access control enforcement.
+
+---
+
 ## Flow Table Verification
 
 By running the following command on the switch:
 
-```bash
+```bash id="a9"
 dpctl dump-flows
 ```
 
@@ -120,7 +169,7 @@ We observe that the controller installs flow entries that:
 
 ## Conclusion
 
-The SDN controller successfully enforces a whitelist-based access control mechanism. Authorized hosts are allowed to communicate, while unauthorized hosts are blocked using dynamically installed OpenFlow rules. This demonstrates centralized control and policy enforcement in Software Defined Networking.
+The SDN controller successfully enforces a whitelist-based access control mechanism. Authorized hosts are allowed to communicate, while unauthorized hosts are blocked using dynamically installed OpenFlow rules. iPerf testing further confirms high performance and correct policy enforcement.
 
 ---
 
