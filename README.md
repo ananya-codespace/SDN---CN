@@ -156,7 +156,6 @@ mininet> h3 iperf -c 10.0.0.4
 
 ![iPerf Result Unauthorized](Screenshots/iperf_unauth.png)
 
----
 
 * Connection fails or no throughput observed
 
