@@ -1,6 +1,6 @@
-# SDN-Based Access Control Whitelist
+# SDN-Based Access Control System
 
-Course: Computer Networks Lab
+Course: Computer Networks 
 
 Project Type: SDN Mininet Simulation
 
@@ -20,6 +20,28 @@ Implement an SDN controller that:
 * Intercepts all incoming packets via the PacketIn handler.
 * Automatically drops packets originating from unauthorized MAC addresses (h3 and h4).
 * Installs specific Match-Action flow rules on the Open vSwitch for authorized traffic to minimize controller overhead.
+
+---
+
+## Working of the SDN Access Control
+
+The SDN controller operates using a whitelist-based access control combined with learning switch behavior:
+
+* When a packet arrives, the switch sends a **PacketIn** to the controller if no rule exists.
+* The controller checks the **source MAC address**:
+
+  * If it is in the whitelist (h1, h2) → packet is allowed
+  * Otherwise (h3, h4) → packet is dropped
+* The controller learns **MAC-to-port mapping** to track host locations.
+* If the destination MAC is known:
+
+  * A **flow rule (match–action)** is installed and packet is forwarded
+* If the destination is unknown:
+
+  * The packet is **flooded** to discover the host
+* Once rules are installed, future packets are handled directly by the switch
+
+ This demonstrates centralized control, dynamic rule installation, and efficient packet forwarding in SDN.
 
 ---
 
@@ -87,7 +109,7 @@ mininet> pingall
 
 ---
 
-## 🚀 Performance Testing using iPerf
+## Performance Testing using iPerf
 
 To evaluate network performance and validate access control, **iperf** is used to measure throughput between hosts.
 
@@ -120,7 +142,7 @@ mininet> h1 iperf -c 10.0.0.2 -t 5
 * Throughput ~29–31 Gbits/sec
 * High bandwidth due to Mininet virtual environment
 
-👉 Confirms that authorized hosts communicate efficiently.
+ Confirms that authorized hosts communicate efficiently.
 
 ---
 
@@ -132,7 +154,7 @@ mininet> h3 iperf -c 10.0.0.4
 
 * Connection fails or no throughput observed
 
-👉 Confirms access control enforcement.
+ Confirms access control enforcement.
 
 ---
 
